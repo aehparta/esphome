@@ -77,7 +77,7 @@ time:
           - light.control:
               id: light0
               brightness: 15%
-      - cron: 0 0 24 * * *
+      - cron: 0 0 0 * * *
         then:
           - light.turn_off: light0
 
