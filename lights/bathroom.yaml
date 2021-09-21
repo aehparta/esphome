@@ -15,9 +15,8 @@ wifi:
   ssid: elukka
   password: salaisuus
   domain: .lan
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: esphome-fallback-test
+    ssid: esphome-bathroom
     password: salaisuus
 
 captive_portal:
