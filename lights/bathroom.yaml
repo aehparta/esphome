@@ -27,7 +27,7 @@ light:
     name: Bathroom light
     platform: monochromatic
     output: pwm0
-    default_transition_length: 0s
+    default_transition_length: 500ms
 
 binary_sensor:
   - id: motion_sensor
@@ -45,6 +45,20 @@ binary_sensor:
     on_release:
       then:
         - light.turn_off: light0
+
+time:
+  - platform: sntp
+    on_time:
+      - cron: 0 0 22 * * *
+        then:
+          - light.control:
+              id: light0
+              brightness: 25%
+      - cron: 0 0 5 * * *
+        then:
+          - light.control:
+              id: light0
+              brightness: 100%
 
 output:
   - id: pwm0
