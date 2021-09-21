@@ -1,0 +1,74 @@
+esphome:
+  name: light-bathroom
+  platform: ESP32
+  board: pico32
+
+logger:
+
+mqtt:
+  broker: iot.lan
+
+ota:
+  password: salaisuus
+
+wifi:
+  ssid: elukka
+  password: salaisuus
+  domain: .lan
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: esphome-fallback-test
+    password: salaisuus
+
+captive_portal:
+
+light:
+  - id: light0
+    name: Bathroom light
+    platform: monochromatic
+    output: pwm0
+    default_transition_length: 0s
+
+binary_sensor:
+  - id: motion_sensor
+    name: Bathroom motion
+    platform: gpio
+    device_class: motion
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+    filters:
+      - delayed_off: 60s
+    on_press:
+      then:
+        - light.turn_on: light0
+    on_release:
+      then:
+        - light.turn_off: light0
+
+output:
+  - id: pwm0
+    type: float
+    platform: template
+    write_action:
+      - output.set_level:
+          id: pwm0ch0
+          level: !lambda return state;
+      - output.set_level:
+          id: pwm0ch1
+          level: !lambda return state;
+      - output.set_level:
+          id: pwm0ch2
+          level: !lambda return state;
+  - id: pwm0ch0
+    platform: ledc
+    pin: GPIO2
+    frequency: 19531
+  - id: pwm0ch1
+    platform: ledc
+    pin: GPIO4
+    frequency: 19531
+  - id: pwm0ch2
+    platform: ledc
+    pin: GPIO18
+    frequency: 19531
