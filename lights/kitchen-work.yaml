@@ -42,3 +42,18 @@ output:
     platform: ledc
     pin: GPIO18
     frequency: 19531
+
+sensor:
+  - id: temperature0
+    name: Kitchen, worklight
+    platform: adc
+    state_class: measurement
+    device_class: temperature
+    unit_of_measurement: °C
+    accuracy_decimals: 0
+    update_interval: 10s
+    pin: GPIO33
+    attenuation: 6db
+    filters:
+      - offset: -0.4
+      - multiply: 51.2821
