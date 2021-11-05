@@ -38,45 +38,40 @@ time:
   - platform: sntp
     on_time:
       # morning
-      - cron: 0 0 6 * * *
+#      - cron: 0 0 6 * * *
+#        then:
+#          - light.turn_on:
+#              id: light0
+#              brightness: 30%
+#      - cron: 0 0 8 * * *
+#        then:
+#          - light.control:
+#              id: light0
+#              brightness: 50%
+#      - cron: 0 0 10 * * *
+#        then:
+#          - light.turn_off: light0
+      # evening
+      - cron: 0 0 20 * * *
         then:
           - light.turn_on:
               id: light0
               brightness: 30%
-      - cron: 0 0 8 * * *
-        then:
-          - light.control:
-              id: light0
-              brightness: 50%
-      - cron: 0 0 10 * * *
-        then:
-          - light.turn_off: light0
-      # evening
-      - cron: 0 0 16 * * *
-        then:
-          - light.turn_on:
-              id: light0
-              brightness: 50%
-      - cron: 0 0 20 * * *
-        then:
-          - light.control:
-              id: light0
-              brightness: 40%
       - cron: 0 0 21 * * *
         then:
           - light.control:
               id: light0
-              brightness: 30%
+              brightness: 20%
       - cron: 0 0 22 * * *
         then:
           - light.control:
               id: light0
-              brightness: 20%
+              brightness: 15%
       - cron: 0 0 23 * * *
         then:
           - light.control:
               id: light0
-              brightness: 15%
+              brightness: 10%
       - cron: 0 0 0 * * *
         then:
           - light.turn_off: light0
