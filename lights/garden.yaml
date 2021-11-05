@@ -1,0 +1,52 @@
+esphome:
+  name: light-garden
+  platform: ESP32
+  board: pico32
+
+logger:
+
+mqtt:
+  broker: iot.lan
+  topic_prefix: esphome
+
+ota:
+  password: salaisuus
+
+wifi:
+  ssid: elukka
+  password: salaisuus
+  domain: .lan
+  ap:
+    ssid: esphome-garden
+    password: salaisuus
+
+captive_portal:
+
+light:
+  - id: light0
+    name: Garden
+    platform: monochromatic
+    output: pwm0ch0
+    default_transition_length: 500ms
+
+sun:
+  latitude: 62.600990°
+  longitude: 29.763531°
+  on_sunset:
+    - then:
+        - light.turn_on:
+            id: light0
+            brightness: 100%
+
+time:
+  - platform: sntp
+    on_time:
+      - cron: 0 0 1 * * *
+        then:
+          - light.turn_off: light0
+
+output:
+  - id: pwm0ch0
+    platform: ledc
+    pin: GPIO4
+    frequency: 19531
