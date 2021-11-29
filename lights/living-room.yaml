@@ -24,59 +24,25 @@ captive_portal:
 
 light:
   - id: light0
-    name: Living room, left
+    name: Living room
     platform: monochromatic
-    output: pwm0ch0
-    default_transition_length: 500ms
-  - id: light1
-    name: Living room, back
-    platform: monochromatic
-    output: pwm0ch1
-    default_transition_length: 500ms
-
-time:
-  - platform: sntp
-    on_time:
-      # morning
-#      - cron: 0 0 6 * * *
-#        then:
-#          - light.turn_on:
-#              id: light0
-#              brightness: 30%
-#      - cron: 0 0 8 * * *
-#        then:
-#          - light.control:
-#              id: light0
-#              brightness: 50%
-#      - cron: 0 0 10 * * *
-#        then:
-#          - light.turn_off: light0
-      # evening
-      - cron: 0 0 20 * * *
-        then:
-          - light.turn_on:
-              id: light0
-              brightness: 30%
-      - cron: 0 0 21 * * *
-        then:
-          - light.control:
-              id: light0
-              brightness: 20%
-      - cron: 0 0 22 * * *
-        then:
-          - light.control:
-              id: light0
-              brightness: 15%
-      - cron: 0 0 23 * * *
-        then:
-          - light.control:
-              id: light0
-              brightness: 10%
-      - cron: 0 0 0 * * *
-        then:
-          - light.turn_off: light0
+    output: pwm0
+    default_transition_length: 100ms
 
 output:
+  - id: pwm0
+    type: float
+    platform: template
+    write_action:
+      - output.set_level:
+          id: pwm0ch0
+          level: !lambda return state;
+      - output.set_level:
+          id: pwm0ch1
+          level: !lambda return state;
+      - output.set_level:
+          id: pwm0ch2
+          level: !lambda return state;
   - id: pwm0ch0
     platform: ledc
     pin: GPIO2
