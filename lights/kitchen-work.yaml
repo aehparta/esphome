@@ -29,6 +29,34 @@ light:
     output: pwm0ch0
     default_transition_length: 500ms
 
+binary_sensor:
+  - id: motion_sensor
+    name: Bathroom
+    platform: gpio
+    device_class: motion
+    pin:
+      number: GPIO0
+      mode: INPUT_PULLUP
+    filters:
+      - delayed_off: 60s
+    on_press:
+      then:
+        - if:
+            condition:
+              - light.is_off: light0
+            then:
+              - light.control:
+                  id: light0
+                  brightness: 10%
+              - light.turn_on: light0
+    on_release:
+        - if:
+            condition:
+              - light.is_on: light0
+              - lambda: 'return id(light0).remote_values.get_brightness() < 0.5;'
+            then:
+              - light.turn_off: light0
+
 output:
   - id: pwm0ch0
     platform: ledc
