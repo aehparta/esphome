@@ -1,6 +1,6 @@
 esphome:
   name: patio-table
-  platform: ESP32
+  platform: esp32
   board: pico32
 
 logger:
@@ -23,22 +23,96 @@ wifi:
 captive_portal:
 
 light:
-  - id: pump0
+  - id: lights_river
+    name: Patio table river lights
+    platform: partition
+    segments:
+      - single_light_id: led0
+      - single_light_id: led1
+      - single_light_id: led2
+      # - single_light_id: led3
+      - single_light_id: led4
+      - single_light_id: led5
+      - single_light_id: led6
+      - single_light_id: led7
+      - single_light_id: led8
+      - single_light_id: led9
+
+  - id: lights_waterfall
+    name: Patio table waterfall lights
+    platform: partition
+    segments:
+      - single_light_id: big_led0
+      - single_light_id: big_led1
+      - single_light_id: big_led2
+      - single_light_id: big_led3
+
+  - id: pump
     name: Patio table pump
     platform: monochromatic
-    output: pwm0ch0
-    default_transition_length: 500ms
-  - id: led0
-    name: 'Patio table led #0'
-    platform: monochromatic
-    output: pwm0ch1
-    default_transition_length: 500ms
-  - id: led1
-    name: 'Patio table led #1'
-    platform: monochromatic
-    output: pwm0ch2
-    default_transition_length: 500ms
+    output: pwm_pump
 
+  - id: led0
+    internal: true
+    platform: monochromatic
+    output: pwm_led0
+    effects:
+      - random:
+          transition_length: 0.5s
+          update_interval: 0.5s
+  - id: led1
+    internal: true
+    platform: monochromatic
+    output: pwm_led1
+  - id: led2
+    internal: true
+    platform: monochromatic
+    output: pwm_led2
+  # - id: led3
+  #   internal: true
+  #   platform: monochromatic
+  #   output: pwm_led3
+  - id: led4
+    internal: true
+    platform: monochromatic
+    output: pwm_led4
+  - id: led5
+    internal: true
+    platform: monochromatic
+    output: pwm_led5
+  - id: led6
+    internal: true
+    platform: monochromatic
+    output: pwm_led6
+  - id: led7
+    internal: true
+    platform: monochromatic
+    output: pwm_led7
+  - id: led8
+    internal: true
+    platform: monochromatic
+    output: pwm_led8
+  - id: led9
+    internal: true
+    platform: monochromatic
+    output: pwm_led9
+
+  - id: big_led0
+    internal: true
+    platform: monochromatic
+    output: pwm_big_led0
+  - id: big_led1
+    internal: true
+    platform: monochromatic
+    output: pwm_big_led1
+  - id: big_led2
+    internal: true
+    platform: monochromatic
+    output: pwm_big_led2
+  - id: big_led3
+    internal: true
+    platform: monochromatic
+    output: pwm_big_led3
 
 # time:
 #   - platform: sntp
@@ -53,15 +127,65 @@ light:
 #           - light.turn_off: light0
 
 output:
-  - id: pwm0ch0
+  - id: pwm_pump
     platform: ledc
     pin: GPIO13
     frequency: 19531
-  - id: pwm0ch1
+
+  - id: pwm_led0
     platform: ledc
     pin: GPIO15
     frequency: 19531
-  - id: pwm0ch2
+  - id: pwm_led1
     platform: ledc
     pin: GPIO2
+    frequency: 19531
+  - id: pwm_led2
+    platform: ledc
+    pin: GPIO4
+    frequency: 19531
+  # - id: pwm_led3
+  #   platform: ledc
+  #   pin: GPIO7
+  #   frequency: 19531
+  - id: pwm_led4
+    platform: ledc
+    pin: GPIO32
+    frequency: 19531
+  - id: pwm_led5
+    platform: ledc
+    pin: GPIO33
+    frequency: 19531
+  - id: pwm_led6
+    platform: ledc
+    pin: GPIO25
+    frequency: 19531
+  - id: pwm_led7
+    platform: ledc
+    pin: GPIO26
+    frequency: 19531
+  - id: pwm_led8
+    platform: ledc
+    pin: GPIO27
+    frequency: 19531
+  - id: pwm_led9
+    platform: ledc
+    pin: GPIO14
+    frequency: 19531
+
+  - id: pwm_big_led0
+    platform: ledc
+    pin: GPIO12
+    frequency: 19531
+  - id: pwm_big_led1
+    platform: ledc
+    pin: GPIO19
+    frequency: 19531
+  - id: pwm_big_led2
+    platform: ledc
+    pin: GPIO22
+    frequency: 19531
+  - id: pwm_big_led3
+    platform: ledc
+    pin: GPIO21
     frequency: 19531
