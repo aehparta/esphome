@@ -1,0 +1,67 @@
+esphome:
+  name: patio-table
+  platform: ESP32
+  board: pico32
+
+logger:
+
+mqtt:
+  broker: iot.lan
+  topic_prefix: esphome
+
+ota:
+  password: salaisuus
+
+wifi:
+  ssid: elukka
+  password: salaisuus
+  domain: .lan
+  ap:
+    ssid: esphome-patio-table
+    password: salaisuus
+
+captive_portal:
+
+light:
+  - id: pump0
+    name: Patio table pump
+    platform: monochromatic
+    output: pwm0ch0
+    default_transition_length: 500ms
+  - id: led0
+    name: 'Patio table led #0'
+    platform: monochromatic
+    output: pwm0ch1
+    default_transition_length: 500ms
+  - id: led1
+    name: 'Patio table led #1'
+    platform: monochromatic
+    output: pwm0ch2
+    default_transition_length: 500ms
+
+
+# time:
+#   - platform: sntp
+#     on_time:
+#       - cron: 0 0 16 * * *
+#         then:
+#           - light.turn_on:
+#               id: light0
+#               brightness: 100%
+#       - cron: 0 0 3 * * *
+#         then:
+#           - light.turn_off: light0
+
+output:
+  - id: pwm0ch0
+    platform: ledc
+    pin: GPIO13
+    frequency: 19531
+  - id: pwm0ch1
+    platform: ledc
+    pin: GPIO15
+    frequency: 19531
+  - id: pwm0ch2
+    platform: ledc
+    pin: GPIO2
+    frequency: 19531
