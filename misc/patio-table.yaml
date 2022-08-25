@@ -22,6 +22,12 @@ wifi:
 
 captive_portal:
 
+fan:
+  - id: pump
+    name: Patio table pump
+    platform: speed
+    output: pwm_pump
+
 light:
   - id: lights_river
     name: Patio table river lights
@@ -37,6 +43,10 @@ light:
       - single_light_id: led7
       - single_light_id: led8
       - single_light_id: led9
+    effects:
+      - flicker:
+          alpha: 95%
+          intensity: 3%
 
   - id: lights_waterfall
     name: Patio table waterfall lights
@@ -47,70 +57,62 @@ light:
       - single_light_id: big_led2
       - single_light_id: big_led3
 
-  - id: pump
-    name: Patio table pump
-    platform: monochromatic
-    output: pwm_pump
-
   - id: led0
-    internal: true
+    name: led0
     platform: monochromatic
     output: pwm_led0
     effects:
-      - random:
-          transition_length: 0.5s
-          update_interval: 0.5s
+      - flicker:
+          alpha: 95%
+          intensity: 3%
   - id: led1
-    internal: true
+    name: led1
     platform: monochromatic
     output: pwm_led1
+    effects:
+      - flicker:
+          alpha: 95%
+          intensity: 3%
   - id: led2
-    internal: true
+    name: led2
     platform: monochromatic
     output: pwm_led2
+    effects:
+      - flicker:
+          alpha: 95%
+          intensity: 3%
   - id: led3
-    internal: true
     platform: monochromatic
     output: pwm_led3
   - id: led4
-    internal: true
     platform: monochromatic
     output: pwm_led4
   - id: led5
-    internal: true
     platform: monochromatic
     output: pwm_led5
   - id: led6
-    internal: true
     platform: monochromatic
     output: pwm_led6
   - id: led7
-    internal: true
     platform: monochromatic
     output: pwm_led7
   - id: led8
-    internal: true
     platform: monochromatic
     output: pwm_led8
   - id: led9
-    internal: true
     platform: monochromatic
     output: pwm_led9
 
   - id: big_led0
-    internal: true
     platform: monochromatic
     output: pwm_big_led0
   - id: big_led1
-    internal: true
     platform: monochromatic
     output: pwm_big_led1
   - id: big_led2
-    internal: true
     platform: monochromatic
     output: pwm_big_led2
   - id: big_led3
-    internal: true
     platform: monochromatic
     output: pwm_big_led3
 
