@@ -30,7 +30,7 @@ light:
       - single_light_id: led0
       - single_light_id: led1
       - single_light_id: led2
-      # - single_light_id: led3
+      - single_light_id: led3
       - single_light_id: led4
       - single_light_id: led5
       - single_light_id: led6
@@ -68,10 +68,10 @@ light:
     internal: true
     platform: monochromatic
     output: pwm_led2
-  # - id: led3
-  #   internal: true
-  #   platform: monochromatic
-  #   output: pwm_led3
+  - id: led3
+    internal: true
+    platform: monochromatic
+    output: pwm_led3
   - id: led4
     internal: true
     platform: monochromatic
@@ -144,10 +144,10 @@ output:
     platform: ledc
     pin: GPIO4
     frequency: 19531
-  # - id: pwm_led3
-  #   platform: ledc
-  #   pin: GPIO7
-  #   frequency: 19531
+  - id: pwm_led3
+    platform: ledc
+    pin: GPIO7
+    frequency: 19531
   - id: pwm_led4
     platform: ledc
     pin: GPIO32
@@ -175,7 +175,7 @@ output:
 
   - id: pwm_big_led0
     platform: ledc
-    pin: GPIO12
+    pin: GPIO8
     frequency: 19531
   - id: pwm_big_led1
     platform: ledc
