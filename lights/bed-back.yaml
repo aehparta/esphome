@@ -1,0 +1,35 @@
+esphome:
+  name: light-bed-back
+  platform: ESP32
+  board: pico32
+
+logger:
+
+mqtt:
+  broker: iot.lan
+  topic_prefix: esphome
+
+ota:
+  password: salaisuus
+
+wifi:
+  ssid: elukka
+  password: salaisuus
+  domain: .lan
+  ap:
+    ssid: esphome-bed-back
+    password: salaisuus
+
+captive_portal:
+
+light:
+  - id: light0
+    name: Bed back
+    platform: monochromatic
+    output: pwm0
+
+output:
+  - id: pwm0
+    platform: ledc
+    pin: GPIO4
+    frequency: 30000
