@@ -31,10 +31,22 @@ light:
     blue: pwm0ch2
     default_transition_length: 10ms
 
+sun:
+  latitude: 62.600990°
+  longitude: 29.763531°
+  on_sunset:
+    - then:
+        - light.turn_on:
+            id: light0
+            brightness: 50%
+            red: 100%
+            green: 50%
+            blue: 0%
+
 time:
   - platform: sntp
     on_time:
-      - cron: 0 0 20 * * *
+      - cron: 0 0 22 * * *
         then:
           - light.turn_on:
               id: light0
