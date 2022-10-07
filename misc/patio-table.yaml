@@ -43,10 +43,6 @@ light:
       - single_light_id: led7
       - single_light_id: led8
       - single_light_id: led9
-    effects:
-      - flicker:
-          alpha: 95%
-          intensity: 3%
 
   - id: lights_waterfall
     name: Patio table waterfall lights
@@ -58,29 +54,14 @@ light:
       - single_light_id: big_led3
 
   - id: led0
-    name: led0
     platform: monochromatic
     output: pwm_led0
-    effects:
-      - flicker:
-          alpha: 95%
-          intensity: 3%
   - id: led1
-    name: led1
     platform: monochromatic
     output: pwm_led1
-    effects:
-      - flicker:
-          alpha: 95%
-          intensity: 3%
   - id: led2
-    name: led2
     platform: monochromatic
     output: pwm_led2
-    effects:
-      - flicker:
-          alpha: 95%
-          intensity: 3%
   - id: led3
     platform: monochromatic
     output: pwm_led3
@@ -116,17 +97,69 @@ light:
     platform: monochromatic
     output: pwm_big_led3
 
-# time:
-#   - platform: sntp
-#     on_time:
-#       - cron: 0 0 16 * * *
-#         then:
-#           - light.turn_on:
-#               id: light0
-#               brightness: 100%
-#       - cron: 0 0 3 * * *
-#         then:
-#           - light.turn_off: light0
+time:
+  - platform: sntp
+    on_time:
+      - cron: 0 0 19 * AUG,SEP,OCT,NOV,DEC,JAN,FEB,MAR,APR,MAY *
+        then:
+          - light.turn_on:
+              id: led0
+              brightness: 100%
+          - light.turn_on:
+              id: led1
+              brightness: 100%
+          - light.turn_on:
+              id: led2
+              brightness: 100%
+          - light.turn_on:
+              id: led3
+              brightness: 100%
+          - light.turn_on:
+              id: led4
+              brightness: 100%
+          - light.turn_on:
+              id: led5
+              brightness: 100%
+          - light.turn_on:
+              id: led6
+              brightness: 100%
+          - light.turn_on:
+              id: led7
+              brightness: 100%
+          - light.turn_on:
+              id: led8
+              brightness: 100%
+          - light.turn_on:
+              id: led9
+              brightness: 100%
+          - light.turn_on:
+              id: big_led0
+              brightness: 100%
+          - light.turn_on:
+              id: big_led1
+              brightness: 100%
+          - light.turn_on:
+              id: big_led2
+              brightness: 100%
+          - light.turn_on:
+              id: big_led3
+              brightness: 100%
+      - cron: 0 0 2 * * *
+        then:
+          - light.turn_off: led0
+          - light.turn_off: led1
+          - light.turn_off: led2
+          - light.turn_off: led3
+          - light.turn_off: led4
+          - light.turn_off: led5
+          - light.turn_off: led6
+          - light.turn_off: led7
+          - light.turn_off: led8
+          - light.turn_off: led9
+          - light.turn_off: big_led0
+          - light.turn_off: big_led1
+          - light.turn_off: big_led2
+          - light.turn_off: big_led3
 
 output:
   - id: pwm_pump
