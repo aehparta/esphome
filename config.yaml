@@ -1,0 +1,24 @@
+
+esphome:
+  name: ${name}
+  platform: ${platform}
+  board: ${board}
+
+mqtt:
+  broker: !secret mqtt_broker
+  topic_prefix: !secret mqtt_topic_prefix
+
+ota:
+  password: !secret wifi_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  domain: !secret wifi_domain
+  ap:
+    ssid: ${name}
+    password: !secret wifi_ap_password
+
+captive_portal:
+
+logger:
