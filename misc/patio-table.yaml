@@ -1,6 +1,6 @@
 
 substitutions:
-  name: patio-table
+  name: misc-patio-table
   platform: esp32
   board: pico32
 

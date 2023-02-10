@@ -1,0 +1,4 @@
+.esphome/
+secrets.yaml
+/lights/light-*/
+/misc/misc-*/
