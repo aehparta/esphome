@@ -1,26 +1,10 @@
-esphome:
+
+substitutions:
   name: patio-table
   platform: esp32
   board: pico32
 
-logger:
-
-mqtt:
-  broker: iot.lan
-  topic_prefix: esphome
-
-ota:
-  password: salaisuus
-
-wifi:
-  ssid: elukka
-  password: salaisuus
-  domain: .lan
-  ap:
-    ssid: esphome-patio-table
-    password: salaisuus
-
-captive_portal:
+<<: !include ../config.yaml
 
 fan:
   - id: pump
