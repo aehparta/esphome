@@ -9,6 +9,7 @@ mqtt:
   topic_prefix: !secret mqtt_topic_prefix
 
 ota:
+  platform: esphome
   password: !secret wifi_password
 
 wifi:
